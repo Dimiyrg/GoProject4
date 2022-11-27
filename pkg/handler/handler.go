@@ -1,11 +1,18 @@
-package handlers
+package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/Dimiyrg/GoProject4/pkg/service"
+	"github.com/gin-gonic/gin"
+)
 
-type Handlers struct {
+type Handler struct {
+	services *service.Service
 }
 
-func (h *Handlers) InitRoutes() *gin.Engine {
+func NewHandler(services *service.Service) *Handler {
+	return &Handler{services: services}
+}
+func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
 	auth := router.Group("/auth")
@@ -15,5 +22,6 @@ func (h *Handlers) InitRoutes() *gin.Engine {
 
 	}
 	//api := router.Group("/api")
+	return router
 
 }
